@@ -20,5 +20,6 @@ student_one = Student.create(
   first_name: 'Jose',
   last_name: 'Rodriguez',
   active: true, 
-  user: User.first
+  user: User.first, 
+  school: school
 )
