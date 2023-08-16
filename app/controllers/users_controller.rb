@@ -2,6 +2,20 @@ class UsersController < ApplicationController
 
   include JwtConcern
 
+  def index
+    user = user_from_token
+    if user
+      if user.is_admin
+        users = User.all
+        render json: users, status: :ok
+      else 
+        render json: {message: 'No estás autorizado a ver esta información'}, status: :unauthorized
+      end
+    else 
+      render json: {message: 'Token inválido'}
+    end
+  end
+
   def create 
     user = user_from_token
     if user 
@@ -18,6 +32,22 @@ class UsersController < ApplicationController
       end
     else 
       render json: {message: 'El usuario no existe'}
+    end
+  end
+
+  def update_password
+    user = user_from_token
+    if user.is_admin
+      to_update = User.find(params[:id])
+      to_update.password = params[:new_password]
+      if to_update.save
+        render json: {message: 'Password actualizado'}, status: :ok
+      else
+        render json: {message: 'El password no ha sido actualizado',
+          errores: to_update.errors.full_messages}
+      end
+    else
+      render json: {message: 'No autorizado'}, status: :unauthorized
     end
   end
 
