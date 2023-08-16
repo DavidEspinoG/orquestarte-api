@@ -2,14 +2,14 @@ module JwtConcern
 
   extend ActiveSupport::Concern
   
-  def encode
+  def generate_token(data)
     exp = Time.now.to_i + 4 * 3600
     secret = Rails.application.credentials.secret_key_base
     payload = {
-      data: 'Great job',
+      data: data,
       exp: exp
     }
-    token = JWT.encode payload, secret, 'HS256'
+    JWT.encode payload, secret, 'HS256'
   end
 
   def decode 
