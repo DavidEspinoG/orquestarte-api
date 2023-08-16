@@ -35,6 +35,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if user_from_token.is_admin
+      begin
+        user = User.find(params[:id])
+        if user.destroy 
+          render json: {message: 'El usuario ha sido borrado'}, status: :ok
+        else 
+          render json: {message: 'El usuario no ha sido borrado'}, status: :unprocessable_entity
+        end
+      rescue
+        render json: {message: 'El usuario no existe'}
+      end
+    end
+  end
+
   def update_password
     user = user_from_token
     if user.is_admin
