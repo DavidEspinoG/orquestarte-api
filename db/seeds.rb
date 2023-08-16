@@ -23,3 +23,19 @@ student_one = Student.create(
   user: User.first, 
   school: school
 )
+
+school_year = SchoolYear.create(name: '2023-2024')
+
+months = Month.create([
+  {name: 'Septiembre', student: student_one, school_year: school_year},
+  {name: 'Octubre', student: student_one, school_year: school_year},
+  {name: 'Noviembre', student: student_one, school_year: school_year},
+  {name: 'Diciembre', student: student_one, school_year: school_year},
+  {name: 'Enero', student: student_one, school_year: school_year},
+  {name: 'Febrero', student: student_one, school_year: school_year},
+  {name: 'Marzo', student: student_one, school_year: school_year},
+  {name: 'Abril', student: student_one, school_year: school_year},
+  {name: 'Mayo', student: student_one, school_year: school_year},
+  {name: 'Junio', student: student_one, school_year: school_year},
+  {name: 'Julio', student: student_one, school_year: school_year},
+])

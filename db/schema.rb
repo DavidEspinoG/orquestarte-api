@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_200544) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_211011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "months", force: :cascade do |t|
+    t.string "name"
+    t.boolean "paid", default: false
+    t.bigint "student_id", null: false
+    t.bigint "school_year_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_year_id"], name: "index_months_on_school_year_id"
+    t.index ["student_id"], name: "index_months_on_student_id"
+  end
+
+  create_table "school_years", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "schools", force: :cascade do |t|
     t.string "name"
@@ -45,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_200544) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "months", "school_years"
+  add_foreign_key "months", "students"
   add_foreign_key "students", "schools"
   add_foreign_key "students", "users"
 end
