@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/health', to: 'health#index'
-  get '/fox', to: 'health#fox'
+  get '/users/login', to: 'authentication#login'
   get '/token', to: 'pay_pal#token'
-  get '/jwt/encode', to: 'health#getJwt'
-  get '/jwt/decode', to: 'jwt#decode'
   # Defines the root path route ("/")
   # root "articles#index"
 end
