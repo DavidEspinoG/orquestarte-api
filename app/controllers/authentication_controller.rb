@@ -7,11 +7,11 @@ class AuthenticationController < ApplicationController
     if user 
       if user.authenticate(params[:password])
         data = {
-          user_id: user.id,
+          id: user.id,
           name: user.first_name,
           is_admin: user.is_admin
         }
-        render json: {jwt: generate_token(data)}, status: :ok
+        render json: {token: generate_token(data)}, status: :ok
       else 
         render json: {message: 'El correo o la contraseña son incorrectos'}, status: :unauthorized
       end 
@@ -19,4 +19,9 @@ class AuthenticationController < ApplicationController
       render json: {message: 'El correo o la contraseña son incorrectos'}, status: :unauthorized
     end
   end
+
+  def authenticate 
+    puts user_from_token.first_name
+  end
+
 end
