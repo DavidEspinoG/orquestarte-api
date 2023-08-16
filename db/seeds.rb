@@ -13,3 +13,12 @@ users = User.create(
     {first_name: 'José',last_name: 'Hernandez', email: 'jose@mail.com', password: 'password'}
   ]
 )
+
+school = School.create(name: 'Walter C. Buchanan')
+
+student_one = Student.create(
+  first_name: 'Jose',
+  last_name: 'Rodriguez',
+  active: true, 
+  user: User.first
+)
