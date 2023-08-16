@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   delete '/users/:id/delete', to: 'users#destroy'
   post '/users/:id/update_password', to: 'users#update_password'
+  get '/students', to: 'students#index'
   get '/token', to: 'pay_pal#token'
   # Defines the root path route ("/")
   # root "articles#index"
