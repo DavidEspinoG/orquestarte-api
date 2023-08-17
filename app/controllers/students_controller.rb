@@ -26,4 +26,25 @@ class StudentsController < ApplicationController
     end
   end
 
+  def destroy 
+    user = user_from_token 
+    if user
+      if user.is_admin
+        begin
+          student = Student.find(params[:student_id])
+          if student.destroy 
+            render json: {message: 'Deleted'}, status: :ok
+          end
+        rescue
+          render json: {message: 'Not found'}, status: :unprocessable_entity
+        end
+      else 
+        render json: {message: 'No autorizado'}, status: :ok
+      end
+    else 
+      render json: {message: 'Token inválido'}, status: :unauthorized
+    end
+
+  end
+
 end
