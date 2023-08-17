@@ -15,4 +15,15 @@ class StudentsController < ApplicationController
       render json: {message: 'Token inválido'}, status: :ok
     end
   end
+
+  def students_from_user 
+    user = user_from_token
+    if user 
+      students = user.students
+      render json: students, status: :ok
+    else
+      render json: {message: 'Token inválido'}, status: :unauthorized
+    end
+  end
+
 end
