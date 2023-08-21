@@ -11,7 +11,12 @@ class AuthenticationController < ApplicationController
           name: user.first_name,
           is_admin: user.is_admin
         }
-        render json: {token: generate_token(data)}, status: :ok
+        render json: {
+          name: user.first_name, 
+          id: user.id, 
+          is_admin: user.is_admin,
+          token: generate_token(data)
+        }, status: :ok
       else 
         render json: {message: 'El correo o la contraseña son incorrectos'}, status: :unauthorized
       end 
