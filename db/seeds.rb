@@ -14,7 +14,7 @@ users = User.create(
   ]
 )
 
-school = School.create(name: 'Walter C. Buchanan')
+school = School.create(name: 'Walter C. Buchanan', code: 'BUCH2023')
 
 student_one = Student.create(
   first_name: 'Jose',

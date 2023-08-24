@@ -17,21 +17,17 @@ class UsersController < ApplicationController
   end
 
   def create 
-    user = user_from_token
-    if user 
-      if user.is_admin 
-        new_user = User.new(email: params[:email], password: params[:password], 
-          first_name: params[:first_name], last_name: params[:last_name])
-        if new_user.save
-          render json: {message: 'Nuevo usuario creado'}, status: :ok
-        else 
-          render json: {message: 'El nuevo usuario no ha sido creado', error: new_user.errors.full_messages}, status: :unprocessable_entity
-        end
+    school = School.find_by(code: params[:school_code])
+    if school 
+      puts params
+      user = User.new(user_params)
+      if user.save
+        render json: {message: 'Usuario creado'}, status: :ok
       else
-        render json: {message: 'No tiene permiso de crear nuevos usuarios'}, status: :unauthorized
+        render json: {message: user.errors.full_messages}, status: :ok
       end
     else 
-      render json: {message: 'El usuario no existe'}
+      render json: {message: 'Código de escuela incorrecto'}, status: :unprocessable_entity
     end
   end
 
@@ -64,6 +60,13 @@ class UsersController < ApplicationController
     else
       render json: {message: 'No autorizado'}, status: :unauthorized
     end
+  end
+
+  private 
+
+  def user_params 
+    params.require(:user).permit(:first_name, :last_name, :email, 
+      :password, :phone_number, :school_code)
   end
 
 end
