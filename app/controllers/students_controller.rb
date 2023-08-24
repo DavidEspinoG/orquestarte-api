@@ -16,6 +16,22 @@ class StudentsController < ApplicationController
     end
   end
 
+  def create
+    user = user_from_token
+    if user
+      student = Student.new(student_params)
+      student.user = user
+      student.school = user.school
+      if student.save
+        render json: {message: 'Estudiante inscrito con éxito'}, status: :ok
+      else 
+        render json: {message: student.errors.full_messages}, status: :unprocessable_entity
+      end
+    else
+      render json: {message: 'Token inválido o inexistente'}, status: :unauthorized
+    end
+  end
+
   def students_from_user 
     user = user_from_token
     if user 
@@ -44,7 +60,12 @@ class StudentsController < ApplicationController
     else 
       render json: {message: 'Token inválido'}, status: :unauthorized
     end
+  end
 
+  private
+
+  def student_params
+    params.require(:student).permit(:first_name, :last_name)
   end
 
 end

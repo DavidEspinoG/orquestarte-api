@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete '/users/:id/delete', to: 'users#destroy'
   post '/users/:id/update_password', to: 'users#update_password'
   get '/students', to: 'students#index'
+  post '/students', to: 'students#create'
   get '/students_from_user', to: 'students#students_from_user'
   delete '/students/:student_id', to: 'students#destroy'
   get '/schools', to: 'schools#index'
