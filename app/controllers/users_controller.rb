@@ -19,9 +19,9 @@ class UsersController < ApplicationController
   def create 
     school = School.find_by(code: params[:school_code])
     if school 
-      puts params
       user = User.new(user_params)
       if user.save
+        user.school = school
         render json: {message: 'Usuario creado'}, status: :ok
       else
         render json: {message: user.errors.full_messages}, status: :ok

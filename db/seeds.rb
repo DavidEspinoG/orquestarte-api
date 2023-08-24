@@ -5,16 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+school = School.create(name: 'Walter C. Buchanan', code: 'BUCH2023')
 
 users = User.create(
   [
-    {first_name: 'David',last_name: 'Espino', email: 'david@mail.com', password: 'password', is_admin: true},
-    {first_name: 'Elena',last_name: 'Garcia', email: 'elena@mail.com', password: 'password', is_admin: true},
-    {first_name: 'José',last_name: 'Hernandez', email: 'jose@mail.com', password: 'password'}
+    {first_name: 'David',last_name: 'Espino', email: 'david@mail.com', password: 'password', is_admin: true, school: school},
+    {first_name: 'Elena',last_name: 'Garcia', email: 'elena@mail.com', password: 'password', is_admin: true, school: school},
+    {first_name: 'José',last_name: 'Hernandez', email: 'jose@mail.com', password: 'password', school: school}
   ]
 )
 
-school = School.create(name: 'Walter C. Buchanan', code: 'BUCH2023')
 
 student_one = Student.create(
   first_name: 'Jose',
