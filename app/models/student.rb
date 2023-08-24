@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
   belongs_to :user
   belongs_to :school
-  has_many :months
+  has_many :months, dependent: :destroy
 
   after_create :create_months
 
