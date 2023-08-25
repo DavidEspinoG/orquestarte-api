@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       user = User.new(user_params)
       user.school = school
       if user.save
+        UserMailer.with(user: user).welcome_email.deliver_later
         render json: {message: 'Usuario creado'}, status: :ok
       else
         render json: {message: user.errors.full_messages}, status: :ok
