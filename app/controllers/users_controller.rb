@@ -18,6 +18,9 @@ class UsersController < ApplicationController
 
   def create 
     school = School.find_by(code: params[:school_code])
+    puts 'here i am'
+    puts params[:school_code]
+    puts params["school_code"]
     if school 
       user = User.new(user_params)
       user.school = school
@@ -67,7 +70,7 @@ class UsersController < ApplicationController
 
   def user_params 
     params.require(:user).permit(:first_name, :last_name, :email, 
-      :password, :phone_number, :school_code)
+      :password, :phone_number)
   end
 
 end

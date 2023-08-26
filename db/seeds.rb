@@ -15,13 +15,13 @@ users = User.create(
   ]
 )
 
+school_year = SchoolYear.create(name: '2023-2024')
 
 student_one = Student.create(
   first_name: 'Jose',
-  last_name: 'Rodriguez',
+  last_name: 'Junior',
   active: true, 
-  user: User.first, 
+  user: User.third, 
   school: school
 )
 
-school_year = SchoolYear.create(name: '2023-2024')

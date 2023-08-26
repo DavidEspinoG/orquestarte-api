@@ -26,7 +26,8 @@ module JwtConcern
   def user_from_token 
     secret = Rails.application.credentials.secret_key_base
     begin 
-      decoded_token = JWT.decode params[:token], secret, true, {algorithm: 'HS256'}
+      token = request.headers['Authorization'].split(' ').last
+      decoded_token = JWT.decode token, secret, true, {algorithm: 'HS256'}
       user = User.find(decoded_token[0]['data']['id'])
       return user ? user : nil
     rescue

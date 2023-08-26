@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/health', to: 'health#index'
-  get '/users/login', to: 'authentication#login'
-  post '/users/create', to: 'users#create'
+  post '/users/login', to: 'authentication#login'
+  post '/users/signup', to: 'users#create'
   get '/users', to: 'users#index'
   delete '/users/:id/delete', to: 'users#destroy'
   post '/users/:id/update_password', to: 'users#update_password'
