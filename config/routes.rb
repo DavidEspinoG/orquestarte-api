@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   delete '/students/:student_id', to: 'students#destroy'
   get '/schools', to: 'schools#index'
   get '/token', to: 'pay_pal#token'
+  post '/paypal/create-paypal-order', to: 'pay_pal#create_order'
   # Defines the root path route ("/")
   # root "articles#index"
 end
