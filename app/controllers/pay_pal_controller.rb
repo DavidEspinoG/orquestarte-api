@@ -19,7 +19,7 @@ class PayPalController < ApplicationController
           {
             "amount": {
               "currency_code": "MXN", 
-              "value": "100.00"
+              "value": get_purchase_total
             }
           }
         ],
@@ -27,8 +27,12 @@ class PayPalController < ApplicationController
         "payment_source": {
           "paypal": {
             "experience_context": {
-              "brand_name": "Orquestarte Educacion Musical", 
-              "return_url": "http://localhost:3000"
+              "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED",
+              "brand_name": "Orquestarte Educacion Musical",
+              "locale": "es-MX",
+              "user_action": "PAY_NOW", 
+              "return_url": "https://example.com/returnUrl",
+              "cancel_url": "https://example.com/returnUrl"
             }
           }
         }
@@ -56,4 +60,18 @@ class PayPalController < ApplicationController
     )
     token = JSON.parse(response.body)['access_token']
   end
+
+  def get_purchase_total 
+    cart = params[:cart]
+    ids = cart.map {|element| element[:id]}
+    total = 0
+    ids.each do |id|
+      month = Month.find(id);
+      if month 
+        total += month.price
+      end
+    end
+    total.to_s
+  end
+
 end
