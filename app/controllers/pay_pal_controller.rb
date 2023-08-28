@@ -104,5 +104,4 @@ class PayPalController < ApplicationController
       month.save
     end  
   end
-
 end

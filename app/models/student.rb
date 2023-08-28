@@ -12,17 +12,17 @@ class Student < ApplicationRecord
   def create_months
     school_year = current_school_year
     months = Month.create([
-      {name: 'Septiembre', student: self, school_year: school_year},
-      {name: 'Octubre', student: self, school_year: school_year},
-      {name: 'Noviembre', student: self, school_year: school_year},
-      {name: 'Diciembre', student: self, school_year: school_year},
-      {name: 'Enero', student: self, school_year: school_year},
-      {name: 'Febrero', student: self, school_year: school_year},
-      {name: 'Marzo', student: self, school_year: school_year},
-      {name: 'Abril', student: self, school_year: school_year},
-      {name: 'Mayo', student: self, school_year: school_year},
-      {name: 'Junio', student: self, school_year: school_year},
-      {name: 'Julio', student: self, school_year: school_year},
+      {name: 'Septiembre 2023', student: self, school_year: school_year, price: 1400},
+      {name: 'Octubre 2023', student: self, school_year: school_year, price: 1400},
+      {name: 'Noviembre 2023', student: self, school_year: school_year, price: 1400},
+      {name: 'Diciembre 2023', student: self, school_year: school_year, price: 1400},
+      {name: 'Enero 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Febrero 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Marzo 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Abril 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Mayo 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Junio 2024', student: self, school_year: school_year, price: 1400},
+      {name: 'Julio 2024', student: self, school_year: school_year, price: 1400},
     ])
   end
 

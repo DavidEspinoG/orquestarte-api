@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
   def students_from_user 
     user = user_from_token
     if user 
-      students = Student.includes(:months).where(user: user)
+      students = Student.includes(:months).where(user: user).order(:id)
       render json: students, include: :months, status: :ok
     else
       render json: {message: 'Token inválido'}, status: :unauthorized
