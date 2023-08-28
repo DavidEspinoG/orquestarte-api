@@ -19,7 +19,7 @@ class PayPalController < ApplicationController
           {
             "amount": {
               "currency_code": "MXN", 
-              "value": get_purchase_total
+              "value": get_purchase_total, 
             }
           }
         ],
@@ -51,6 +51,10 @@ class PayPalController < ApplicationController
         Authorization: "Bearer #{access_token}"
       }
       response = Excon.post(url, headers: headers)
+      if response.status === 201
+        puts 'Pago exitoso'
+        complete_purchase(params[:cart])
+      end
       render json: response.body, status: :ok
     else 
       render json: {message: 'order_id not provided'}, status: :unprocessable_entity
@@ -90,6 +94,15 @@ class PayPalController < ApplicationController
       end
     end
     total.to_s
+  end
+
+  def complete_purchase(cart) 
+    cart.each do |element|
+      id = element[:id]
+      month = Month.find(id)
+      month.paid = true
+      month.save
+    end  
   end
 
 end
