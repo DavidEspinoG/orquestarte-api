@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/schools', to: 'schools#index'
   get '/token', to: 'pay_pal#token'
   post '/paypal/create-paypal-order', to: 'pay_pal#create_order'
+  post '/paypal/capture-payment', to: 'pay_pal#capture_payment'
   # Defines the root path route ("/")
   # root "articles#index"
 end

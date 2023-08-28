@@ -41,6 +41,22 @@ class PayPalController < ApplicationController
     render json: response.body, status: :ok
   end
 
+  def capture_payment 
+    access_token = get_access_token
+    order_id = params[:order_id]
+    if order_id
+      url = "https://api-m.sandbox.paypal.com/v2/checkout/orders/#{order_id}/capture" 
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer #{access_token}"
+      }
+      response = Excon.post(url, headers: headers)
+      render json: response.body, status: :ok
+    else 
+      render json: {message: 'order_id not provided'}, status: :unprocessable_entity
+    end
+  end
+
   private 
 
   def get_access_token
@@ -63,12 +79,14 @@ class PayPalController < ApplicationController
 
   def get_purchase_total 
     cart = params[:cart]
-    ids = cart.map {|element| element[:id]}
     total = 0
-    ids.each do |id|
-      month = Month.find(id);
-      if month 
-        total += month.price
+    if cart 
+      ids = cart.map {|element| element[:id]}
+      ids.each do |id|
+        month = Month.find(id);
+        if month 
+          total += month.price
+        end
       end
     end
     total.to_s
