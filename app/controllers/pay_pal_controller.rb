@@ -9,7 +9,7 @@ class PayPalController < ApplicationController
   def create_order
     access_token = get_access_token
     response = Excon.post(
-      "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "https://api-m.paypal.com/v2/checkout/orders",
       headers: {
         'Content-Type': 'application/json', 
         Authorization: "Bearer #{access_token}"
@@ -45,7 +45,7 @@ class PayPalController < ApplicationController
     access_token = get_access_token
     order_id = params[:order_id]
     if order_id
-      url = "https://api-m.sandbox.paypal.com/v2/checkout/orders/#{order_id}/capture" 
+      url = "https://api-m.paypal.com/v2/checkout/orders/#{order_id}/capture" 
       headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer #{access_token}"
@@ -64,7 +64,7 @@ class PayPalController < ApplicationController
   private 
 
   def get_access_token
-    url = "https://api-m.sandbox.paypal.com/v1/oauth2/token"
+    url = "https://api-m.paypal.com/v1/oauth2/token"
     client_id = Rails.application.credentials.paypal_client_id
     secret = Rails.application.credentials.paypal_secret
     credentials = Base64.strict_encode64("#{client_id}:#{secret}")
