@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: orquestarte_api_production
-  username: orquestarte_api
-  password: <%= ENV["ORQUESTARTE_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
